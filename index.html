@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOC Cafe & Roastery | Riyadh, Saudi Arabia</title>
+    <meta name="description" content="Experience premium specialty coffee at NOC Cafe in Riyadh, Hittin District. Sourcing the finest single-origin beans from South America and Africa. Enjoy a luxury, modern atmosphere inspired by global architecture.">
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="NOC Cafe & Roastery | Riyadh Luxury Specialty Coffee">
+    <meta property="og:description" content="Not Only Coffee. Discover our hand-selected artisan beans, premium desserts, and sophisticated workspace in Hittin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://noc-cafe.com">
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: { 50: '#FDFBF7', 100: '#FAF6EE', 200: '#F2EAD9', 300: '#E5D5BC' },
+                        espresso: { 400: '#8C6D53', 600: '#5C4033', 800: '#2B1E17', 900: '#1C120C' },
+                        luxuryGold: '#C5A880',
+                        charcoal: '#111111'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav { backdrop-filter: blur(12px); background-color: rgba(28, 18, 12, 0.85); }
+        .dark .glass-nav { background-color: rgba(17, 17, 17, 0.9); }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1C120C; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #C5A880; border-radius: 4px; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .text-gradient { background: linear-gradient(135deg, #FFF 30%, #C5A880 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-cream-50 text-espresso-900 dark:bg-charcoal dark:text-cream-100 font-sans transition-colors duration-300 antialiased overflow-x-hidden">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] bg-luxuryGold z-50 transition-all duration-100" style="width: 0%"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-40 glass-nav border-b border-white/5 transition-all duration-300 text-white">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" onclick="navigateTo('home')" class="flex flex-col items-start tracking-widest">
+                <span class="font-serif text-2xl font-bold tracking-[0.25em] text-gradient">NOC</span>
+                <span class="text-[9px] uppercase tracking-[0.4em] text-luxuryGold font-medium -mt-1">Not Only Coffee</span>
+            </a>
+            
+            <!-- Desktop Navigation Menu -->
+            <div class="hidden lg:flex items-center space-x-8 uppercase text-xs tracking-widest font-medium">
+                <a href="#" onclick="navigateTo('home')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Home</a>
+                <a href="#" onclick="navigateTo('about')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Our Story</a>
+                <a href="#" onclick="navigateTo('beans')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Coffee Beans</a>
+                <a href="#" onclick="navigateTo('menu')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Menu</a>
+                <a href="#" onclick="navigateTo('order')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Order Online</a>
+                <a href="#" onclick="navigateTo('reservation')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Reservations</a>
+                <a href="#" onclick="navigateTo('gallery')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Gallery</a>
+                <a href="#" onclick="navigateTo('contact')" class="hover:text-luxuryGold transition-colors py-2 border-b border-transparent">Contact</a>
+            </div>
+
+            <!-- Action Hub Icons & Utilities -->
+            <div class="flex items-center space-x-4">
+                <!-- Lang Toggle (RTL Mock/Prep) -->
+                <button onclick="toggleLanguage()" class="text-xs tracking-widest uppercase border border-white/20 px-2 py-1 rounded text-luxuryGold hover:bg-white/5 transition-all">EN</button>
+                
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleDarkMode()" class="p-2 text-white/80 hover:text-luxuryGold transition-colors">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Cart Button -->
+                <button onclick="navigateTo('order')" class="relative p-2 text-white/80 hover:text-luxuryGold transition-colors">
+                    <i class="fa-solid fa-shopping-bag text-lg"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-luxuryGold text-espresso-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center opacity-0 scale-0 transition-all duration-300">0</span>
+                </button>
+
+                <!-- System Admin Dashboard Quick link -->
+                <button onclick="navigateTo('admin')" class="hidden sm:inline-flex p-2 text-white/40 hover:text-luxuryGold transition-colors" title="Admin Portal">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-white p-2">
+                    <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dynamic Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-espresso-900 dark:bg-charcoal border-t border-white/5 px-6 py-8 uppercase text-xs tracking-widest font-medium space-y-4">
+            <a href="#" onclick="navigateTo('home'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Home</a>
+            <a href="#" onclick="navigateTo('about'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Our Story</a>
+            <a href="#" onclick="navigateTo('beans'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Coffee Beans</a>
+            <a href="#" onclick="navigateTo('menu'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Menu</a>
+            <a href="#" onclick="navigateTo('order'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Order Online</a>
+            <a href="#" onclick="navigateTo('reservation'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Reservations</a>
+            <a href="#" onclick="navigateTo('gallery'); toggleMobileMenu();" class="block py-2 text-white border-b border-white/5">Gallery</a>
+            <a href="#" onclick="navigateTo('contact'); toggleMobileMenu();" class="block py-2 text-white">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Floating Mobile Action Hub Overlay -->
+    <div class="fixed bottom-6 right-6 z-40 lg:hidden">
+        <button onclick="navigateTo('order')" class="bg-luxuryGold hover:bg-luxuryGold/90 text-espresso-900 shadow-2xl w-14 h-14 rounded-full flex items-center justify-center transition-transform active:scale-95">
+            <i class="fa-solid fa-coffee text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Main Dynamic Application Container Shell -->
+    <main class="pt-24 min-h-[calc(100vh-24rem)]">
+
+        <!-- PAGE 1: HOME PAGE -->
+        <section id="homePage" class="page-section active">
+            <!-- Fullscreen Cinematic Hero Component -->
+            <div class="relative h-[90vh] bg-espresso-900 flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-40 transition-transform duration-[10000ms] scale-105 hover:scale-100" style="background-image: url('IMG_8127.jpeg'), url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1920');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso-900 via-transparent to-black/40"></div>
+                
+                <div class="relative max-w-5xl mx-auto px-6 text-center text-white space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs tracking-[0.2em] uppercase text-luxuryGold">
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <span>Top Rated Coffee Hub • Riyadh (4.2★ 1.7k Reviews)</span>
+                    </div>
+                    <h1 class="font-serif text-5xl md:text-8xl font-bold tracking-tight leading-none text-gradient">
+                        Crafting Timeless <br><span class="italic font-light">Coffee Realities</span>
+                    </h1>
+                    <p class="max-w-xl mx-auto text-sm md:text-base text-cream-200 font-light tracking-wide leading-relaxed">
+                        An architectural masterpiece in Hittin district serving complex, single-origin flavor profiles directly sourced from remote fields across South America and Africa.
+                    </p>
+                    <div class="pt-4 flex flex-wrap justify-center gap-4">
+                        <button onclick="navigateTo('order')" class="px-8 py-4 bg-luxuryGold hover:bg-cream-100 text-espresso-900 uppercase text-xs font-bold tracking-[0.2em] transition-all duration-300 shadow-xl">Order Online</button>
+                        <button onclick="navigateTo('menu')" class="px-8 py-4 border border-white/30 hover:border-luxuryGold hover:text-luxuryGold bg-white/5 backdrop-blur-sm uppercase text-xs font-bold tracking-[0.2em] text-white transition-all duration-300">View Luxury Menu</button>
+                        <button onclick="navigateTo('reservation')" class="px-8 py-4 bg-transparent hover:bg-white/10 text-white border-b-2 border-luxuryGold uppercase text-xs font-bold tracking-[0.2em] transition-all duration-300">Reserve a Table</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Statistical Counter Showcase Bar -->
+            <div class="bg-espresso-900 text-white border-y border-white/5 py-12">
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="font-serif text-4xl font-bold text-luxuryGold">18+</div>
+                        <div class="text-[10px] uppercase tracking-widest text-cream-300 mt-2">Single-Origin Regions</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-4xl font-bold text-luxuryGold">4.2★</div>
+                        <div class="text-[10px] uppercase tracking-widest text-cream-300 mt-2">1.7k Google Reviews</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-4xl font-bold text-luxuryGold">100%</div>
+                        <div class="text-[10px] uppercase tracking-widest text-cream-300 mt-2">Sun-Dried Washed Arabica</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-4xl font-bold text-luxuryGold">Texan</div>
+                        <div class="text-[10px] uppercase tracking-widest text-cream-300 mt-2">Inspired Architecture</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature V60 & Bakery Showcase Feature Component -->
+            <div class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-semibold block">The Crown Jewel</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold tracking-tight">Our Masterpiece Hand-Poured V60</h2>
+                    <p class="text-espresso-600 dark:text-cream-300 text-sm md:text-base leading-relaxed font-light">
+                        Prepared meticulously by pouring hot water dynamically over freshly roasted ground coffee, dripping into crystal carafes. The extraction yields a balanced profile showcasing bright notes of native fruits, wild nuts, and pure dark chocolate.
+                    </p>
+                    <div class="p-6 bg-cream-100 dark:bg-espresso-900 border-l-2 border-luxuryGold rounded-r">
+                        <h4 class="font-serif font-bold text-lg text-luxuryGold">Signature Honey Cake Pairings</h4>
+                        <p class="text-xs mt-1 font-light leading-relaxed">Multi-layered with thin artisanal sponges, velvet cream fillings, and real crushed graham crackers for pristine sensory textures.</p>
+                    </div>
+                    <button onclick="navigateTo('beans')" class="inline-flex items-center space-x-3 text-xs uppercase tracking-widest font-bold text-luxuryGold group">
+                        <span>Explore Single-Origins</span>
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="h-80 bg-cover bg-center rounded shadow-lg transform translate-y-6" style="background-image: url('IMG_8126.jpeg'), url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600');"></div>
+                    <div class="h-80 bg-cover bg-center rounded shadow-lg" style="background-image: url('IMG_8113.jpeg'), url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=600');"></div>
+                </div>
+            </div>
+
+            <!-- Promotional Banner Carousel Slide Component -->
+            <div class="bg-luxuryGold text-espresso-900 py-4 overflow-hidden relative w-full">
+                <div class="flex whitespace-nowrap space-x-12 animate-marquee text-xs font-bold uppercase tracking-[0.3em]">
+                    <span>✦ LUXURY COFFEE ROASTERS RIYADH</span>
+                    <span>✦ FREE SHIPPING FOR ROASTS ABOVE 200 SR</span>
+                    <span>✦ EXPERIENCE TEXAN ARCHITECTURE IN HITTIN</span>
+                    <span>✦ NOT ONLY COFFEE — A LIFESTYLE STATEMENT</span>
+                    <span>✦ 4.2 STAR RATED GLOBAL EXPERIENCE</span>
+                </div>
+                <style>
+                    @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+                    .animate-marquee { display: inline-flex; animation: marquee 25s linear infinite; width: max-content; }
+                </style>
+            </div>
+
+            <!-- Store Atmosphere Architectural Section -->
+            <div class="bg-espresso-900 dark:bg-black text-white py-24">
+                <div class="max-w-7xl mx-auto px-6 text-center space-y-4 max-w-3xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-medium">Immersive Spaces</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold tracking-tight">The Texan Architecture Bar</h2>
+                    <p class="text-sm font-light text-cream-300">A sensory environment blending rustic leather cigar lounge aesthetics, grey sepia wash tones, warm hanging structural Edison fixtures, and 5 mechanical timezone clocks telling stories of Paris, Moscow, and Berlin.</p>
+                </div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="relative group overflow-hidden h-96 rounded">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('IMG_8114.jpeg'), url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=600');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-6 left-6"><p class="text-xs uppercase tracking-widest text-luxuryGold">Main Lounge</p><h3 class="font-serif text-xl font-bold">Stone &amp; Iron Elements</h3></div>
+                    </div>
+                    <div class="relative group overflow-hidden h-96 rounded">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('IMG_8019.jpeg'), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-6 left-6"><p class="text-xs uppercase tracking-widest text-luxuryGold">The Study Corner</p><h3 class="font-serif text-xl font-bold">Leather &amp; Greenery</h3></div>
+                    </div>
+                    <div class="relative group overflow-hidden h-96 rounded">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('IMG_8127.jpeg'), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=600');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-6 left-6"><p class="text-xs uppercase tracking-widest text-luxuryGold">Brewing Theater</p><h3 class="font-serif text-xl font-bold">Cold Brew Barrels</h3></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Subscription Element Component -->
+            <div class="max-w-4xl mx-auto px-6 py-24 text-center space-y-6">
+                <h3 class="font-serif text-3xl font-bold">Join the Connoisseur Circle</h3>
+                <p class="text-xs font-light text-espresso-600 dark:text-cream-300 max-w-md mx-auto tracking-wide">Receive custom notifications regarding premium micro-lot bean yields from Peru, Panama, and Yemen directly inside your inbox.</p>
+                <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-center justify-center max-w-md mx-auto gap-2">
+                    <input type="email" placeholder="YOUR EMAIL ADDRESS" required class="w-full px-4 py-3 text-xs tracking-widest bg-cream-100 dark:bg-espresso-900 border border-espresso-200 dark:border-white/10 rounded focus:outline-none focus:border-luxuryGold text-espresso-900 dark:text-white">
+                    <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-espresso-900 dark:bg-luxuryGold text-white dark:text-espresso-900 text-xs font-bold tracking-widest uppercase rounded hover:opacity-90 transition-opacity whitespace-nowrap">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- PAGE 2: ABOUT PAGE -->
+        <section id="aboutPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="space-y-2">
+                        <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-semibold block">Our Manifesto</span>
+                        <h1 class="font-serif text-5xl font-bold tracking-tight">Not Only Coffee</h1>
+                    </div>
+                    <p class="text-lg font-light text-espresso-800 dark:text-cream-200 leading-relaxed italic">
+                        "Amid Riyadh’s trendy coffee shops, where uncomfortable seating often prioritizes quantity over quality, NOC Cafe stands out by promising a relaxed, cozy atmosphere and an authentic coffee experience."
+                    </p>
+                    <p class="text-sm font-light leading-relaxed text-espresso-600 dark:text-cream-300">
+                        The cafe, which stands for “Not Only Coffee,” is famous for its wide variety of coffee beans, and their menu showcases a selection sourced directly from farms in South America and Africa, including from Kenya, Rwanda, Brazil, Mexico, and Peru.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="border-t border-espresso-200 pt-4">
+                            <h4 class="font-serif font-bold text-luxuryGold">100% Traceable</h4>
+                            <p class="text-xs text-espresso-500 mt-1">Direct trade micro-lots with complete transparency across high altitude estates.</p>
+                        </div>
+                        <div class="border-t border-espresso-200 pt-4">
+                            <h4 class="font-serif font-bold text-luxuryGold">Riyadh Heart</h4>
+                            <p class="text-xs text-espresso-500 mt-1">Proudly rooted in Hittin District, pushing cultural boundaries daily.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-[600px] rounded overflow-hidden shadow-2xl bg-espresso-800">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-90" style="background-image: url('IMG_8114.jpeg'), url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=600');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-espresso-900 via-transparent to-transparent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: SHOP BEANS PAGE -->
+        <section id="beansPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-medium block mb-2">Artisan Roastery</span>
+                    <h1 class="font-serif text-4xl font-bold tracking-tight">Single-Origin Roast Catalog</h1>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <input type="text" id="beanSearch" oninput="filterBeans()" placeholder="Search Origin / Flavor Note..." class="px-4 py-2 text-xs bg-white dark:bg-espresso-900 border border-espresso-200 dark:border-white/10 rounded focus:outline-none focus:border-luxuryGold">
+                    <select id="beanSort" onchange="filterBeans()" class="px-4 py-2 text-xs bg-white dark:bg-espresso-900 border border-espresso-200 dark:border-white/10 rounded focus:outline-none focus:border-luxuryGold">
+                        <option value="default">Sort: Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="altitude">Highest Altitude</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="beansGrid">
+                <!-- Beans Cards populated injection via Engine -->
+            </div>
+        </section>
+
+        <!-- PAGE 4: MENU PAGE -->
+        <section id="menuPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-medium block">The Laboratory</span>
+                <h1 class="font-serif text-4xl font-bold tracking-tight">In-House Dining & Brew Menu</h1>
+                <p class="text-xs font-light text-espresso-600 dark:text-cream-300 max-w-md mx-auto">Premium drinks, delicate snacks, and savory artisan sandwiches engineered fresh every single morning.</p>
+            </div>
+
+            <!-- Tab System Controller -->
+            <div class="flex justify-center space-x-4 mb-12 uppercase text-xs tracking-widest font-bold border-b border-espresso-100 dark:border-white/5">
+                <button onclick="switchMenuCategory('coffee')" id="btn-cat-coffee" class="menu-cat-btn pb-4 border-b-2 border-luxuryGold text-luxuryGold">Coffee &amp; Drinks</button>
+                <button onclick="switchMenuCategory('food')" id="btn-cat-food" class="menu-cat-btn pb-4 border-b-2 border-transparent text-espresso-400">Sandwiches &amp; Sweets</button>
+            </div>
+
+            <!-- Coffee and Drinks Menu Section -->
+            <div id="menuCategory-coffee" class="menu-content-block grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="font-serif text-2xl font-bold border-b border-dashed border-espresso-200 pb-2">Espresso Foundations</h3>
+                    <div id="drinks-list-espresso" class="space-y-6"></div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="font-serif text-2xl font-bold border-b border-dashed border-espresso-200 pb-2">Craft Specialities</h3>
+                    <div id="drinks-list-specialties" class="space-y-6"></div>
+                </div>
+            </div>
+
+            <!-- Food and Snacks Menu Section -->
+            <div id="menuCategory-food" class="menu-content-block hidden grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="font-serif text-2xl font-bold border-b border-dashed border-espresso-200 pb-2">Artisan Sandwiches</h3>
+                    <div id="food-list-sandwiches" class="space-y-6"></div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="font-serif text-2xl font-bold border-b border-dashed border-espresso-200 pb-2">Premium Pastries &amp; Snacks</h3>
+                    <div id="food-list-snacks" class="space-y-6"></div>
+                </div>
+            </div>
+
+            <!-- Static Structured File References Block Container -->
+            <div class="mt-20 pt-12 border-t border-espresso-100 dark:border-white/5 grid grid-cols-1 md:grid-cols-2 gap-6 text-center text-xs tracking-widest uppercase text-espresso-400">
+                <div class="p-6 bg-cream-100 dark:bg-espresso-900 rounded border border-white/5">
+                    <i class="fa-solid fa-file-pdf mb-2 text-lg text-luxuryGold block"></i>
+                    <span>Primary Menu Resume Reference: IMG_8150.jpeg</span>
+                </div>
+                <div class="p-6 bg-cream-100 dark:bg-espresso-900 rounded border border-white/5">
+                    <i class="fa-solid fa-file-pdf mb-2 text-lg text-luxuryGold block"></i>
+                    <span>Secondary Menu Resume Reference: IMG_8152.jpeg</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: ONLINE ORDERING SYSTEM -->
+        <section id="orderPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <!-- Cart Content Form Engine Panel -->
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="p-6 bg-white dark:bg-espresso-900 shadow-sm rounded border border-espresso-100 dark:border-white/5">
+                        <h2 class="font-serif text-2xl font-bold mb-6">1. Fulfillment Mode</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="border-2 border-luxuryGold p-4 rounded cursor-pointer flex items-center justify-between">
+                                <div>
+                                    <span class="block font-bold text-xs uppercase tracking-wider">Boutique Pickup</span>
+                                    <span class="text-[11px] font-light text-espresso-500">Hittin, Riyadh Roastery</span>
+                                </div>
+                                <input type="radio" name="fulfillment" value="pickup" checked class="accent-luxuryGold">
+                            </label>
+                            <label class="border border-espresso-200 dark:border-white/10 p-4 rounded cursor-pointer flex items-center justify-between">
+                                <div>
+                                    <span class="block font-bold text-xs uppercase tracking-wider">Express Courier</span>
+                                    <span class="text-[11px] font-light text-espresso-500">Riyadh Metropolitan Wide</span>
+                                </div>
+                                <input type="radio" name="fulfillment" value="delivery" class="accent-luxuryGold">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-white dark:bg-espresso-900 shadow-sm rounded border border-espresso-100 dark:border-white/5">
+                        <h2 class="font-serif text-2xl font-bold mb-6">2. Order Overview</h2>
+                        <div id="cartItemsList" class="space-y-4 divide-y divide-espresso-100 dark:divide-white/5">
+                            <!-- Items will dynamic render here -->
+                            <p class="text-xs font-light text-espresso-400 py-4">Your order basket is empty. Head to our Coffee Beans or Menu sections to add items.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-white dark:bg-espresso-900 shadow-sm rounded border border-espresso-100 dark:border-white/5">
+                        <h2 class="font-serif text-2xl font-bold mb-6">3. Secure Payment Architecture</h2>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" class="border-2 border-luxuryGold p-3 rounded text-center text-xs font-bold uppercase tracking-widest flex items-center justify-center space-x-2">
+                                    <i class="fa-brands fa-apple-pay text-lg"></i> <span>Apple Pay</span>
+                                </button>
+                                <button type="button" class="border border-espresso-200 dark:border-white/10 p-3 rounded text-center text-xs font-bold uppercase tracking-widest text-espresso-400 flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-credit-card"></i> <span>Mada / Visa</span>
+                                </button>
+                            </div>
+                            <div class="space-y-3 pt-4">
+                                <input type="text" placeholder="CARDHOLDER NAME" class="w-full px-4 py-3 text-xs bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/5 rounded focus:outline-none">
+                                <input type="text" placeholder="CARD NUMBER" class="w-full px-4 py-3 text-xs bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/5 rounded focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sticky Order Summary Sidebar Container Component -->
+                <div class="space-y-6">
+                    <div class="p-6 bg-espresso-900 text-white rounded shadow-xl sticky top-28 space-y-6 border border-white/5">
+                        <h3 class="font-serif text-xl font-bold text-luxuryGold border-b border-white/10 pb-4">Receipt Summary</h3>
+                        <div class="space-y-3 text-xs tracking-wider font-light">
+                            <div class="flex justify-between"><span>Subtotal</span><span id="summarySubtotal">SR 0.00</span></div>
+                            <div class="flex justify-between"><span>VAT (15%)</span><span id="summaryTax">SR 0.00</span></div>
+                            <div class="flex justify-between"><span>Delivery/Fulfillment Fee</span><span id="summaryFulfillment">SR 0.00</span></div>
+                            <div class="pt-4 border-t border-white/10 flex justify-between font-bold text-sm text-luxuryGold">
+                                <span>Total Payable</span><span id="summaryTotal">SR 0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <label class="text-[10px] uppercase tracking-widest text-cream-300 block mb-2">Promotional Voucher</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="promoInput" placeholder="PROMO CODE" class="bg-white/10 border border-white/10 rounded px-3 py-2 text-xs uppercase text-white w-full tracking-widest focus:outline-none">
+                                <button onclick="applyPromoCode()" class="bg-luxuryGold text-espresso-900 px-4 py-2 text-xs font-bold rounded">Apply</button>
+                            </div>
+                        </div>
+
+                        <button onclick="processFinalCheckout()" class="w-full py-4 bg-luxuryGold hover:bg-cream-100 text-espresso-900 text-center uppercase text-xs font-bold tracking-[0.2em] transition-all duration-300 shadow-md">
+                            Confirm Secure Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: RESERVATION PAGE -->
+        <section id="reservationPage" class="page-section max-w-5xl mx-auto px-6 py-16">
+            <div class="grid md:grid-cols-2 gap-12 items-center bg-white dark:bg-espresso-900 shadow-xl rounded-lg overflow-hidden border border-espresso-100 dark:border-white/5">
+                <div class="p-8 md:p-12 space-y-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-semibold block">Priority Lounge Booking</span>
+                        <h1 class="font-serif text-3xl font-bold tracking-tight mt-1">Reserve Your Space</h1>
+                    </div>
+                    <form onsubmit="handleReservation(event)" class="space-y-4 text-xs font-medium uppercase tracking-wider">
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-espresso-400">Full Name</label>
+                            <input type="text" required class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none focus:border-luxuryGold text-espresso-900 dark:text-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-espresso-400">Date</label>
+                                <input type="date" required class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none text-espresso-900 dark:text-white">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-espresso-400">Time Window</label>
+                                <select required class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none text-espresso-900 dark:text-white">
+                                    <option>08:00 AM - 11:00 AM</option>
+                                    <option>11:00 AM - 03:00 PM</option>
+                                    <option>03:00 PM - 07:00 PM</option>
+                                    <option>07:00 PM - 12:00 AM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-espresso-400">Guest Count</label>
+                                <input type="number" min="1" max="12" value="2" required class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none text-espresso-900 dark:text-white">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-espresso-400">Lounge Area</label>
+                                <select class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none text-espresso-900 dark:text-white">
+                                    <option>Texan Stone Bar Zone</option>
+                                    <option>Leather Cigar Lounge Area</option>
+                                    <option>Artistic Study Greenhouse</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-espresso-400">Special Requests / Dietary Accommodation</label>
+                            <textarea rows="3" class="w-full p-3 bg-cream-50 dark:bg-charcoal border border-espresso-200 dark:border-white/10 rounded focus:outline-none text-espresso-900 dark:text-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-espresso-900 dark:bg-luxuryGold text-white dark:text-espresso-900 font-bold tracking-[0.2em] transition-opacity hover:opacity-90">Confirm Lounge Reservation</button>
+                    </form>
+                </div>
+                <div class="hidden md:block h-full min-h-[500px] bg-cover bg-center" style="background-image: url('IMG_8019.jpeg'), url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=600');">
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 7: GALLERY PAGE -->
+        <section id="galleryPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-medium block">Visual Anthology</span>
+                <h1 class="font-serif text-4xl font-bold tracking-tight">Inside NOC Cafe &amp; Roastery</h1>
+            </div>
+            
+            <!-- Masonry Grid Configuration Gallery -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div onclick="openLightbox('IMG_8114.jpeg')" class="relative group cursor-pointer overflow-hidden h-72 rounded bg-black">
+                    <img src="IMG_8114.jpeg" onerror="this.src='https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=600'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" alt="Cafe Interior Design">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"><i class="fa-solid fa-magnifying-glass text-white text-lg"></i></div>
+                </div>
+                <div onclick="openLightbox('IMG_8126.jpeg')" class="relative group cursor-pointer overflow-hidden h-72 rounded bg-black">
+                    <img src="IMG_8126.jpeg" onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" alt="Coffee Preparation">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"><i class="fa-solid fa-magnifying-glass text-white text-lg"></i></div>
+                </div>
+                <div onclick="openLightbox('IMG_8113.jpeg')" class="relative group cursor-pointer overflow-hidden h-72 rounded bg-black">
+                    <img src="IMG_8113.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=600'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" alt="Premium Honey Cake Desserts">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"><i class="fa-solid fa-magnifying-glass text-white text-lg"></i></div>
+                </div>
+                <div onclick="openLightbox('IMG_8019.jpeg')" class="relative group cursor-pointer overflow-hidden h-72 rounded bg-black">
+                    <img src="IMG_8019.jpeg" onerror="this.src='https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" alt="Luxury Lifestyle">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"><i class="fa-solid fa-magnifying-glass text-white text-lg"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 8: CONTACT PAGE -->
+        <section id="contactPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.3em] text-luxuryGold font-medium block">Visit Our Sanctuary</span>
+                        <h1 class="font-serif text-4xl font-bold tracking-tight">Connect with Us</h1>
+                    </div>
+                    <div class="space-y-4 text-xs font-medium tracking-widest uppercase">
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-location-dot text-luxuryGold text-sm mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-espresso-900 dark:text-white">Location</h4>
+                                <p class="text-[11px] font-light text-espresso-500 mt-1 lowercase">Hittin district, King Khalid Rd,<br>Riyadh 13518, Saudi Arabia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-phone text-luxuryGold text-sm mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-espresso-900 dark:text-white">Phone Concierge</h4>
+                                <p class="text-[11px] font-light text-espresso-500 mt-1">+966 55 837 3332</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-envelope text-luxuryGold text-sm mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-espresso-900 dark:text-white">Digital Mail</h4>
+                                <p class="text-[11px] font-light text-espresso-500 mt-1 lowercase">NOC@SVC-Arabia.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://www.instagram.com/noccafferoastry" target="_blank" class="w-10 h-10 bg-cream-200 dark:bg-espresso-900 rounded-full flex items-center justify-center hover:text-luxuryGold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/966558373332" target="_blank" class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center hover:opacity-90 transition-opacity"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Google Maps Embed Implementation -->
+                    <div class="w-full h-80 rounded overflow-hidden shadow-sm border border-espresso-100 dark:border-white/5 bg-cream-200">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1m1s0x3e2ee1f0d2c345e9%3A0x105cee1586581d98!2sNOC+Caffe+and+Roastry!5e0!3m2!1sen!2sdz!4v1716650000000!5m2!1sen!2sdz" class="w-full h-full border-0 grayscale dark:invert" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Contact Inquiry Submission Node -->
+                    <form onsubmit="handleInquiry(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-medium uppercase tracking-wider">
+                        <input type="text" placeholder="NAME" required class="w-full p-3 bg-white dark:bg-espresso-900 border border-espresso-200 dark:border-white/5 rounded focus:outline-none">
+                        <input type="email" placeholder="EMAIL ADDRESS" required class="w-full p-3 bg-white dark:bg-espresso-900 border border-espresso-200 dark:border-white/5 rounded focus:outline-none">
+                        <textarea placeholder="MESSAGE" rows="4" required class="w-full sm:col-span-2 p-3 bg-white dark:bg-espresso-900 border border-espresso-200 dark:border-white/5 rounded focus:outline-none"></textarea>
+                        <button type="submit" class="sm:col-span-2 py-4 bg-espresso-900 dark:bg-luxuryGold text-white dark:text-espresso-900 font-bold tracking-widest uppercase hover:opacity-95 transition-opacity">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mt-24 max-w-3xl mx-auto space-y-4">
+                <h3 class="font-serif text-2xl font-bold text-center mb-8">Frequently Asked Questions</h3>
+                <div class="border border-espresso-100 dark:border-white/5 rounded p-4 bg-white dark:bg-espresso-900">
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-luxuryGold">What does NOC stand for?</h5>
+                    <p class="text-xs font-light mt-1 text-espresso-600 dark:text-cream-300">NOC stands for "Not Only Coffee", reflecting our commitment to artisan food spaces, interior mastery, and holistic workspace hospitality.</p>
+                </div>
+                <div class="border border-espresso-100 dark:border-white/5 rounded p-4 bg-white dark:bg-espresso-900">
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-luxuryGold">Do you roast your single-origin beans in Riyadh?</h5>
+                    <p class="text-xs font-light mt-1 text-espresso-600 dark:text-cream-300">Yes, our beans are custom custom-roasted on-site inside our Hittin facility to ensure completely uncompromised extraction flavor integrity.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT 9: ADMINISTRATIVE BUSINESS CMS MANAGEMENT PORTAL -->
+        <section id="adminPage" class="page-section max-w-7xl mx-auto px-6 py-16">
+            <div class="border border-dashed border-luxuryGold/40 rounded p-8 bg-white dark:bg-espresso-900 space-y-8">
+                <div class="flex items-center justify-between border-b border-espresso-100 dark:border-white/10 pb-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-luxuryGold font-bold">Internal Ecosystem Data</span>
+                        <h1 class="font-serif text-3xl font-bold">Business Architecture Controller</h1>
+                    </div>
+                    <span class="text-[10px] bg-emerald-600/20 text-emerald-500 font-bold px-3 py-1 rounded-full uppercase tracking-widest">System Connection Safe</span>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div class="p-4 bg-cream-50 dark:bg-charcoal rounded border border-white/5"><h5 class="text-[10px] text-espresso-400 uppercase tracking-widest">Active Stock Items</h5><p class="font-serif text-2xl font-bold mt-1 text-luxuryGold" id="adminStockCount">24 SKUs</p></div>
+                    <div class="p-4 bg-cream-50 dark:bg-charcoal rounded border border-white/5"><h5 class="text-[10px] text-espresso-400 uppercase tracking-widest">Unprocessed Orders</h5><p class="font-serif text-2xl font-bold mt-1 text-luxuryGold">0 Queue</p></div>
+                    <div class="p-4 bg-cream-50 dark:bg-charcoal rounded border border-white/5"><h5 class="text-[10px] text-espresso-400 uppercase tracking-widest">Lounge Bookings Today</h5><p class="font-serif text-2xl font-bold mt-1 text-luxuryGold">14 Tables</p></div>
+                    <div class="p-4 bg-cream-50 dark:bg-charcoal rounded border border-white/5"><h5 class="text-[10px] text-espresso-400 uppercase tracking-widest">Gross Yield Pipeline</h5><p class="font-serif text-2xl font-bold mt-1 text-luxuryGold">Live Sync</p></div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-serif text-xl font-bold">Dynamic Inventory Injection Layer</h3>
+                    <p class="text-xs font-light text-espresso-500">This architectural container map provides programmatic hooks directly interfacing with live menu management arrays, customer databases, configuration metrics, and localized promotion parameters.</p>
+                    <div class="bg-charcoal text-emerald-400 font-mono text-[11px] p-4 rounded overflow-x-auto custom-scrollbar">
+                        // Schema Hook: NOC Cafe Enterprise Inventory Model <br>
+                        { "brand": "NOC Cafe Riyadh", "branches": ["Hittin"], "currency": "SAR", "vat_multiplier": 0.15 }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Premium Lightbox Structure Component -->
+    <div id="globalLightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <button class="absolute top-6 right-6 text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightboxTargetImage" src="" class="max-w-full max-h-[85vh] rounded object-contain shadow-2xl" alt="Enlarged View">
+    </div>
+
+    <!-- Cookie Consent Popup Panel Component -->
+    <div id="cookiePopup" class="fixed bottom-6 left-6 max-w-sm bg-espresso-900 text-white p-6 rounded shadow-2xl z-50 border border-white/10 hidden space-y-4 transition-transform duration-500 translate-y-20">
+        <h4 class="font-serif font-bold text-luxuryGold">Privacy Protocol Preference</h4>
+        <p class="text-[11px] font-light leading-relaxed text-cream-300">We utilize telemetry scripts to personalize data architecture metrics to elevate your structural navigation experience. By clicking accept, you validate cookie execution strategies.</p>
+        <div class="flex justify-end space-x-3 text-[10px] font-bold uppercase tracking-widest">
+            <button onclick="dismissCookie(false)" class="text-white/60 hover:text-white">Decline</button>
+            <button onclick="dismissCookie(true)" class="bg-luxuryGold text-espresso-900 px-4 py-2 rounded">Accept</button>
+        </div>
+    </div>
+
+    <!-- Production Grade Footer Section Component -->
+    <footer class="bg-espresso-900 dark:bg-black text-white py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-xs font-medium tracking-widest uppercase">
+            <div class="space-y-4">
+                <h3 class="font-serif text-2xl font-bold tracking-[0.2em] text-luxuryGold">NOC</h3>
+                <p class="text-[10px] text-cream-300 font-light normal-case tracking-normal leading-relaxed">Not Only Coffee. Sourcing unique flavor characteristics across high altitudes to redefine Riyadh's coffee paradigms.</p>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-luxuryGold font-bold">Navigation</h4>
+                <a href="#" onclick="navigateTo('home')" class="block text-cream-200 hover:text-white transition-colors text-[11px]">Home</a>
+                <a href="#" onclick="navigateTo('about')" class="block text-cream-200 hover:text-white transition-colors text-[11px]">Our Story</a>
+                <a href="#" onclick="navigateTo('beans')" class="block text-cream-200 hover:text-white transition-colors text-[11px]">Coffee Beans</a>
+                <a href="#" onclick="navigateTo('menu')" class="block text-cream-200 hover:text-white transition-colors text-[11px]">Boutique Menu</a>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-luxuryGold font-bold">Operation Hours</h4>
+                <p class="text-[11px] font-light text-cream-300">Saturday - Thursday:<br>06:00 AM - 01:00 AM</p>
+                <p class="text-[11px] font-light text-cream-300">Friday:<br>01:00 PM - 02:00 AM</p>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-luxuryGold font-bold">Corporate Identity</h4>
+                <p class="text-[11px] font-light text-cream-300 normal-case">Hittin District, King Khalid Rd<br>Riyadh, Kingdom of Saudi Arabia</p>
+                <p class="text-[11px] font-light text-cream-300 lowercase">noc@svc-arabia.com</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-[10px] text-espresso-400 tracking-[0.2em]">
+            &copy; 2026 NOC CAFE &amp; ROASTERY. POWERED BY SVC-ARABIA ENTERPRISES. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- CENTRAL PROGRAMMATIC JAVASCRIPT SYSTEM ENGINE -->
+    <script>
+        // Core Reactive Application Architecture State
+        const CONFIG = { currency: "SR", vatRate: 0.15, currentPromoDiscount: 0 };
+        let cart = [];
+        let globalLanguageIsRTL = false;
+
+        // Structured Database Arrays
+        const BEANS_DATA = [
+            { id: "b1", name: "Peru", price: 51, weight: "250g", altitude: "1,700m", processing: "Washed sun-dried", region: "Bourbon", variety: "Arabica", flavors: "Honey, Citrus, Chocolate", image: "IMG_8047.jpeg", altSrc: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=400" },
+            { id: "b2", name: "Ethiopian Sidamo", price: 51, weight: "250g", altitude: "2,220m", processing: "Washed sun-dried", region: "Heirloom", variety: "Arabica", flavors: "Lemon, Cane Sugar, Berries", image: "IMG_8048.jpeg", altSrc: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400" },
+            { id: "b3", name: "El Salvador", price: 53, weight: "250g", altitude: "1,200m - 1,500m", processing: "Washed sun-dried", region: "Heirloom", variety: "Arabica", flavors: "Chocolate, Honey, Toffee, Citrus", image: "IMG_8049.jpeg", altSrc: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400" },
+            { id: "b4", name: "Costa Rica", price: 54, weight: "250g", altitude: "1,200m - 1,800m", processing: "Washed sun-dried", region: "Arabica", variety: "Typica", flavors: "Citrus, Tropical Fruits", image: "IMG_8050.jpeg", altSrc: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=400" },
+            { id: "b5", name: "Guatemala", price: 56, weight: "250g", altitude: "1,500m - 1,800m", processing: "Washed sun-dried", region: "Caturra", variety: "Arabica", flavors: "Chocolate, Caramel, Citrus", image: "IMG_8051.jpeg", altSrc: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=400" },
+            { id: "b6", name: "Brazil Fazenda", price: 45, weight: "250g", altitude: "1,500m - 1,800m", processing: "Washed sun-dried", region: "Caturra", variety: "Arabica", flavors: "Chocolate, Toffee, Nuts", image: "IMG_8052.jpeg", altSrc: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=400" },
+            { id: "b7", name: "Tanzania", price: 45, weight: "250g", altitude: "1,400m - 1,800m", processing: "Washed sun-dried", region: "Arabica", variety: "Bourbon", flavors: "Black Tea, Kiwi, Lemon", image: "IMG_8053.jpeg", altSrc: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400" },
+            { id: "b8", name: "Colombian", price: 67, weight: "250g", altitude: "1,750m", processing: "Washed sun-dried", region: "Colombia", variety: "Guadalupe", flavors: "Citrus, Black Currant", image: "IMG_8054.jpeg", altSrc: "https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=400" },
+            { id: "b9", name: "Panama", price: 51, weight: "250g", altitude: "1,200m - 2,000m", processing: "Washed sun-dried", region: "Caturra", variety: "Arabica", flavors: "Citrus, Coconut", image: "IMG_8055.jpeg", altSrc: "https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=400" },
+            { id: "b10", name: "Rwandaremera (Rwanda)", price: 45, weight: "250g", altitude: "1,460m - 1,900m", processing: "Washed sun-dried", region: "Arabica", variety: "Bourbon", flavors: "Berries, Black Tea, Raisins", image: "IMG_8056.jpeg", altSrc: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400" },
+            { id: "b11", name: "Sumatra", price: 62, weight: "250g", altitude: "750m - 1,500m", processing: "Washed sun-dried", region: "Arabica", variety: "Catimor", flavors: "Herbal, Chocolate", image: "IMG_8057.jpeg", altSrc: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=400" },
+            { id: "b12", name: "Kenya", price: 45, weight: "250g", altitude: "1,700m - 1,800m", processing: "Washed sun-dried", region: "Arabica", variety: "Kenya", flavors: "Bergamot, Berries, Lemon", image: "IMG_8058.jpeg", altSrc: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=400" },
+            { id: "b13", name: "Yemeni Mocha", price: 70, weight: "250g", altitude: "6,500m - 7,000m", processing: "Washed sun-dried", region: "Central Highlands of Yemen", variety: "Bourbon", flavors: "Chocolate, Spicy", image: "IMG_8059.jpeg", altSrc: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400" },
+            { id: "b14", name: "Mexican", price: 45, weight: "250g", altitude: "1,200m - 1,800m", processing: "Washed sun-dried", region: "Chiapas", variety: "Mexican", flavors: "Citrus", image: "IMG_8060.jpeg", altSrc: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=400" },
+            { id: "b15", name: "Uganda", price: 51, weight: "250g", altitude: "1,800m", processing: "Washed sun-dried", region: "Rwenzori", variety: "Uganda", flavors: "Pineapple, Tropical Fruits", image: "IMG_8061.jpeg", altSrc: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=400" },
+            { id: "b16", name: "Nicaragua", price: 58, weight: "250g", altitude: "1,100m - 1,600m", processing: "Washed sun-dried", region: "Arabica", variety: "Bourbon", flavors: "Citrus, Lemon, Chocolate", image: "IMG_8062.jpeg", altSrc: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=400" },
+            { id: "b17", name: "Honduras", price: 41, weight: "250g", altitude: "1,100m - 1,600m", processing: "Washed sun-dried", region: "Arabica", variety: "Bourbon", flavors: "Citrus, Lemon, Chocolate", image: "IMG_8063.jpeg", altSrc: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400" },
+            { id: "b18", name: "Espresso Blend", price: 70, weight: "250g", altitude: "Mixed Tier", processing: "Washed sun-dried", region: "Colombia + Brazil + El Salvador + Ethiopia", variety: "House Blend", flavors: "Rich Toffee, Roasted Cocoa", image: "IMG_8064.jpeg", altSrc: "https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=400" }
+        ];
+
+        const DRINKS_DATA = [
+            { id: "d1", name: "Espresso Short", price: 6, size: "S", category: "espresso", desc: "Concentrated pure aromatic master-shot extract." },
+            { id: "d2", name: "Espresso Long", price: 18, size: "L", category: "espresso", desc: "Extended extraction highlighting intricate secondary notes." },
+            { id: "d3", name: "Cappuccino Small", price: 15, size: "S", category: "espresso", desc: "Velvety microfoam over unified espresso foundation." },
+            { id: "d4", name: "Cappuccino Large", price: 17, size: "L", category: "espresso", desc: "Generous pour of micro-textured milk over our custom blend." },
+            { id: "d5", name: "Frappuccino Oreo", price: 22, size: "S", category: "specialty", desc: "Blended ice culinary experience integrated with chocolate cookies." },
+            { id: "d6", name: "Mojito 7up", price: 22, size: "L", category: "specialty", desc: "Effervescent carbonated infusion with dynamic botanicals." }
+        ];
+
+        const FOOD_DATA = [
+            { id: "f1", name: "Chicken Panini", price: 22, category: "sandwich", desc: "Toasted configuration containing breast cutlets and signature dressings." },
+            { id: "f2", name: "Low Fat Tuna Sandwich", price: 18, category: "sandwich", desc: "Flaked white tuna dressed carefully on light-grain premium loaves." },
+            { id: "f3", name: "Honey Cake", price: 23, category: "snack", desc: "Multi-layered dynamic sponge topped with a delicate graham cracker structure." },
+            { id: "f4", name: "French Toast", price: 27, category: "snack", desc: "Caramelized luxury artisan brioche soaked in vanilla custard metrics." },
+            { id: "f5", name: "Loacker Tortina", price: 8, category: "snack", desc: "Imported premium crisp wafer filled with milk chocolate glaze layer." },
+            { id: "f6", name: "Vanilla Cookies", price: 12, category: "snack", desc: "Baked circular pastry utilizing real organic Madagascar bean extract." }
+        ];
+
+        // SPA Navigation Pipeline
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById(sectionId + 'Page');
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Dark Mode Controller Module
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('themeIcon');
+            if(document.documentElement.classList.contains('dark')) {
+                icon.className = "fa-solid fa-sun text-luxuryGold";
+            } else {
+                icon.className = "fa-solid fa-moon";
+            }
+        }
+
+        // Toggle Responsive Mobile Hub
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        // Language Layout Realignment Engine
+        function toggleLanguage() {
+            globalLanguageIsRTL = !globalLanguageIsRTL;
+            document.documentElement.dir = globalLanguageIsRTL ? "rtl" : "ltr";
+            alert(globalLanguageIsRTL ? "تم تهيئة واجهة المستخدم بالكامل للغة العربية" : "User Interface restored to English standard structural architecture.");
+        }
+
+        // Initialize Beans Display Map Components
+        function renderBeansCatalog(items) {
+            const grid = document.getElementById('beansGrid');
+            if(!grid) return;
+            grid.innerHTML = items.map(bean => `
+                <div class="bg-white dark:bg-espresso-900 border border-espresso-100 dark:border-white/5 rounded overflow-hidden group shadow-sm transition-all duration-300 hover:shadow-xl">
+                    <div class="h-64 overflow-hidden relative bg-charcoal">
+                        <img src="${bean.image}" onerror="this.src='${bean.altSrc}'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${bean.name}">
+                        <div class="absolute top-4 right-4 bg-espresso-900/80 text-white text-[10px] px-2 py-1 rounded tracking-widest">${bean.weight}</div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold tracking-tight">${bean.name}</h3>
+                                <p class="text-[11px] text-luxuryGold font-medium tracking-wide mt-0.5">${bean.region} • ${bean.variety}</p>
+                            </div>
+                            <span class="font-serif text-lg font-bold text-espresso-900 dark:text-luxuryGold">${CONFIG.currency} ${bean.price}</span>
+                        </div>
+                        <div class="text-[11px] space-y-1 font-light border-y border-espresso-100 dark:border-white/5 py-3 text-espresso-600 dark:text-cream-300">
+                            <div class="flex justify-between"><span>Altitude:</span><span class="font-normal">${bean.altitude}</span></div>
+                            <div class="flex justify-between"><span>Processing:</span><span class="font-normal">${bean.processing}</span></div>
+                            <div class="flex justify-between"><span>Flavors:</span><span class="font-normal italic text-luxuryGold">${bean.flavors}</span></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart('${bean.id}', '${bean.name.replace(/'/g, "\\'")}', ${bean.price})" class="flex-1 py-2.5 bg-espresso-900 dark:bg-luxuryGold text-white dark:text-espresso-900 text-[10px] font-bold uppercase tracking-widest rounded hover:opacity-90 transition-opacity">Add To Basket</button>
+                            <button onclick="toggleFavorite(this)" class="px-3 border border-espresso-200 dark:border-white/10 rounded hover:text-rose-500 transition-colors"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtering & Processing Operations for Beans
+        function filterBeans() {
+            const query = document.getElementById('beanSearch').value.toLowerCase();
+            const sort = document.getElementById('beanSort').value;
+            let filtered = BEANS_DATA.filter(b => b.name.toLowerCase().includes(query) || b.flavors.toLowerCase().includes(query));
+            
+            if(sort === "price-low") filtered.sort((a,b) => a.price - b.price);
+            if(sort === "price-high") filtered.sort((a,b) => b.price - a.price);
+            if(sort === "altitude") filtered.sort((a,b) => parseInt(b.altitude.replace(/,/g,'')) - parseInt(a.altitude.replace(/,/g,'')));
+            
+            renderBeansCatalog(filtered);
+        }
+
+        // Render Dining Menu Layout Components
+        function renderDiningMenu() {
+            const espList = document.getElementById('drinks-list-espresso');
+            const specList = document.getElementById('drinks-list-specialties');
+            const sandList = document.getElementById('food-list-sandwiches');
+            const snackList = document.getElementById('food-list-snacks');
+
+            if(!espList) return;
+
+            // Injections
+            espList.innerHTML = DRINKS_DATA.filter(d => d.category === "espresso").map(d => generateMenuItemMarkup(d)).join('');
+            specList.innerHTML = DRINKS_DATA.filter(d => d.category === "specialty").map(d => generateMenuItemMarkup(d)).join('');
+            sandList.innerHTML = FOOD_DATA.filter(f => f.category === "sandwich").map(f => generateMenuItemMarkup(f)).join('');
+            snackList.innerHTML = FOOD_DATA.filter(f => f.category === "snack").map(f => generateMenuItemMarkup(f)).join('');
+        }
+
+        function generateMenuItemMarkup(item) {
+            return `
+                <div class="group flex justify-between items-start space-x-4 p-2 rounded hover:bg-cream-100 dark:hover:bg-white/5 transition-all">
+                    <div class="space-y-1 flex-1">
+                        <div class="flex items-center space-x-2">
+                            <h4 class="font-serif font-bold text-base tracking-tight">${item.name}</h4>
+                            ${item.size ? `<span class="text-[9px] bg-espresso-200 dark:bg-white/10 text-espresso-800 dark:text-cream-200 px-1 rounded font-bold">${item.size}</span>` : ''}
+                        </div>
+                        <p class="text-[11px] font-light text-espresso-500 dark:text-cream-300 max-w-sm">${item.desc}</p>
+                    </div>
+                    <div class="text-right space-y-2">
+                        <span class="font-serif font-bold text-sm text-luxuryGold block">${CONFIG.currency} ${item.price}</span>
+                        <button onclick="addToCart('${item.id}', '${item.name}', ${item.price})" class="opacity-0 group-hover:opacity-100 text-[10px] uppercase tracking-widest font-bold text-espresso-900 dark:text-white border-b border-luxuryGold transition-all">Add</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function switchMenuCategory(cat) {
+            document.querySelectorAll('.menu-content-block').forEach(b => b.classList.add('hidden'));
+            document.querySelectorAll('.menu-cat-btn').forEach(btn => {
+                btn.classList.remove('border-luxuryGold', 'text-luxuryGold');
+                btn.classList.add('border-transparent', 'text-espresso-400');
+            });
+            
+            document.getElementById(`menuCategory-${cat}`).classList.remove('hidden');
+            const targetBtn = document.getElementById(`btn-cat-${cat}`);
+            targetBtn.classList.remove('border-transparent', 'text-espresso-400');
+            targetBtn.classList.add('border-luxuryGold', 'text-luxuryGold');
+        }
+
+        // Reactive Cart Management Sub-System
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id, name, price, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const list = document.getElementById('cartItemsList');
+            const totalQty = cart.reduce((acc, curr) => acc + curr.qty, 0);
+
+            // Badge Element Sync
+            if(totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('opacity-0', 'scale-0');
+            } else {
+                badge.classList.add('opacity-0', 'scale-0');
+            }
+
+            // Checkout Pipeline Computations
+            if(list) {
+                if(cart.length === 0) {
+                    list.innerHTML = `<p class="text-xs font-light text-espresso-400 py-4">Your order basket is empty.</p>`;
+                } else {
+                    list.innerHTML = cart.map(item => `
+                        <div class="flex justify-between items-center py-3 text-xs">
+                            <div>
+                                <h5 class="font-bold tracking-wide">${item.name}</h5>
+                                <p class="text-[10px] text-luxuryGold mt-0.5">${CONFIG.currency} ${item.price} each</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 border rounded border-espresso-200 dark:border-white/10 flex items-center justify-center">-</button>
+                                <span class="font-bold text-xs">${item.qty}</span>
+                                <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 border rounded border-espresso-200 dark:border-white/10 flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                calculateTotals();
+            }
+        }
+
+        function calculateTotals() {
+            const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+            const subtotalWithPromo = Math.max(0, subtotal - CONFIG.currentPromoDiscount);
+            const tax = subtotalWithPromo * CONFIG.vatRate;
+            const fulfillment = subtotal > 0 ? 15 : 0; // Flat fee execution base
+            const total = subtotalWithPromo + tax + fulfillment;
+
+            document.getElementById('summarySubtotal').innerText = `SR ${subtotal.toFixed(2)}`;
+            document.getElementById('summaryTax').innerText = `SR ${tax.toFixed(2)}`;
+            document.getElementById('summaryFulfillment').innerText = `SR ${fulfillment.toFixed(2)}`;
+            document.getElementById('summaryTotal').innerText = `SR ${total.toFixed(2)}`;
+        }
+
+        function applyPromoCode() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            if(code === "NOC2026" || code === "RIYADH") {
+                CONFIG.currentPromoDiscount = 15;
+                alert("Premium Promo Authorized: SR 15 deduction applied to operational calculations.");
+                calculateTotals();
+            } else {
+                alert("Invalid configuration protocol code.");
+            }
+        }
+
+        function processFinalCheckout() {
+            if(cart.length === 0) {
+                alert("Basket is structurally void.");
+                return;
+            }
+            alert("Order transmitted securely via HTTPS protocol layer. Your luxurious roast sequence is preparing.");
+            cart = [];
+            updateCartUI();
+            navigateTo('home');
+        }
+
+        // Global Form Submission Intercepts
+        function handleSubscribe(e) { e.preventDefault(); alert("Telemetry Sync Successful. Welcome to the circle."); e.target.reset(); }
+        function handleReservation(e) { e.preventDefault(); alert("Lounge allocation confirmed. A dynamic verification SMS has been generated via local Riyadh nodes."); e.target.reset(); }
+        function handleInquiry(e) { e.preventDefault(); alert("Inquiry routing completed. Our operational concierge will verify connection context shortly."); e.target.reset(); }
+        function toggleFavorite(btn) { 
+            const icon = btn.querySelector('i');
+            icon.classList.toggle('fa-regular');
+            icon.classList.toggle('fa-solid');
+            icon.classList.toggle('text-rose-500');
+        }
+
+        // Lightbox Utility Module
+        function openLightbox(src) {
+            const box = document.getElementById('globalLightbox');
+            const img = document.getElementById('lightboxTargetImage');
+            img.src = src;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.remove('opacity-0'), 50);
+        }
+        function closeLightbox() {
+            const box = document.getElementById('globalLightbox');
+            box.classList.add('opacity-0');
+            setTimeout(() => box.classList.add('hidden'), 300);
+        }
+
+        // Telemetry Privacy Controls
+        function dismissCookie(accept) {
+            const pop = document.getElementById('cookiePopup');
+            pop.classList.add('translate-y-40');
+            setTimeout(() => pop.classList.add('hidden'), 500);
+        }
+
+        // Scroll Progress Handler
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+        });
+
+        // System Initialization Trigger Sequence
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBeansCatalog(BEANS_DATA);
+            renderDiningMenu();
+            
+            // Trigger Cookie Overlay Prompt safely
+            setTimeout(() => {
+                const pop = document.getElementById('cookiePopup');
+                pop.classList.remove('hidden');
+                setTimeout(() => pop.classList.remove('translate-y-40'), 100);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
